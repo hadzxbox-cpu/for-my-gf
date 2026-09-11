@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Our Story & Forever</title>
   <!-- Google Fonts for Storybook Aesthetics -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -24,6 +24,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -50,15 +51,29 @@
 
     .book-container {
       width: 100%;
-      max-width: 550px;
+      max-width: 620px;
       background: var(--card-bg);
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(230, 57, 70, 0.08);
-      padding: 40px 30px;
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(230, 57, 70, 0.09);
+      padding: 45px 35px;
       position: relative;
       border: 1px solid #f8edeb;
       text-align: center;
       z-index: 10;
+    }
+
+    /* Tablet optimization */
+    @media (max-width: 768px) {
+      .book-container {
+        padding: 35px 25px;
+        border-radius: 20px;
+      }
+      h2 {
+        font-size: 1.6rem !important;
+      }
+      p {
+        font-size: 0.98rem !important;
+      }
     }
 
     .page {
@@ -80,26 +95,27 @@
       text-transform: uppercase;
       letter-spacing: 2px;
       color: var(--subtext);
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       font-weight: 600;
     }
 
     .illustration {
-      font-size: 3.5rem;
-      margin: 15px 0;
+      font-size: 3.2rem;
+      margin: 10px 0 15px 0;
     }
 
     h1, h2 {
       font-family: 'Playfair Display', serif;
       color: var(--primary);
-      margin-bottom: 15px;
-      font-size: 1.9rem;
+      margin-bottom: 16px;
+      font-size: 1.85rem;
+      line-height: 1.3;
     }
 
     p {
-      line-height: 1.7;
+      line-height: 1.8;
       color: #4a4e69;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       margin-bottom: 25px;
       font-weight: 300;
     }
@@ -110,7 +126,7 @@
       align-items: center;
       gap: 15px;
       margin-top: 20px;
-      min-height: 50px;
+      min-height: 55px;
       position: relative;
     }
 
@@ -143,8 +159,9 @@
     }
 
     #no-btn {
-      position: absolute;
-      transition: all 0.15s ease;
+      position: relative;
+      transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
+      touch-action: manipulation;
     }
 
     .final-screen {
@@ -175,9 +192,9 @@
     <!-- PAGE 1 -->
     <div class="page active" id="page-1">
       <div class="page-number">Chapter 1</div>
-      <div class="illustration">📖</div>
-      <h2>Once Upon a Time...</h2>
-      <p>Every great story has a turning point—a moment where everything before it feels quiet, and everything after it feels bright. For me, that turning point was meeting you.</p>
+      <div class="illustration">🌌</div>
+      <h2>Out of This World</h2>
+      <p>The very day I laid my eyes on you, you were already the most beautiful woman on the planet—let alone beating the entire solar system itself. No galaxy or star could ever outshine the way you looked to me in that exact moment.</p>
       <div class="btn-container">
         <button onclick="nextPage(2)">Turn Page ➔</button>
       </div>
@@ -186,9 +203,9 @@
     <!-- PAGE 2 -->
     <div class="page" id="page-2">
       <div class="page-number">Chapter 2</div>
-      <div class="illustration">✨</div>
-      <h2>The Quiet Moments</h2>
-      <p>It’s in the small things: the laughs we share, the quiet comfort of just knowing you're there, and the way you make every busy day feel lighter just by being in my life.</p>
+      <div class="illustration">☀️</div>
+      <h2>A Million Setting Suns</h2>
+      <p>Speaking of comparing you to the sun... you carry the gorgeousness of a thousand, even a million setting suns and the breathtaking rising of every single one. You radiate a warmth that lights up everything around you.</p>
       <div class="btn-container">
         <button class="secondary" onclick="nextPage(1)">Back</button>
         <button onclick="nextPage(3)">Turn Page ➔</button>
@@ -198,9 +215,9 @@
     <!-- PAGE 3 -->
     <div class="page" id="page-3">
       <div class="page-number">Chapter 3</div>
-      <div class="illustration">⏳</div>
-      <h2>A Request for Patience</h2>
-      <p>I know building our future takes time and effort. I'm working hard every day so that I can give us the best life possible. Thank you for walking beside me and for being so patient with me along the way.</p>
+      <div class="illustration">🔥</div>
+      <h2>A Patience Beyond Earth</h2>
+      <p>Yet as bright as you shine, what amazes me most is your heart. You hold a patience strong enough to challenge a thousand exploding suns. You bury me in your never-ending patience, melting my heart over and over again, leaving me constantly thinking: <i>"What can I do to appreciate her even better, never hurt her, and cherish her to the bone?"</i></p>
       <div class="btn-container">
         <button class="secondary" onclick="nextPage(2)">Back</button>
         <button onclick="nextPage(4)">Turn Page ➔</button>
@@ -210,9 +227,9 @@
     <!-- PAGE 4 -->
     <div class="page" id="page-4">
       <div class="page-number">Chapter 4</div>
-      <div class="illustration">💍</div>
-      <h2>Looking Ahead</h2>
-      <p>My dream isn't just about today or tomorrow. My dream is to hold your hand through every milestone ahead, to grow together, and to make you my wife one day.</p>
+      <div class="illustration">👑</div>
+      <h2>Grace, Confidence & Leadership</h2>
+      <p>I adore how you carry yourself forward—your confidence, your attention to detail, and your craving to lead and step up, even when standing alongside me as my secondary man. The strength and dignity you show every day command my respect and admiration endlessly.</p>
       <div class="btn-container">
         <button class="secondary" onclick="nextPage(3)">Back</button>
         <button onclick="nextPage(5)">Turn Page ➔</button>
@@ -221,13 +238,49 @@
 
     <!-- PAGE 5 -->
     <div class="page" id="page-5">
+      <div class="page-number">Chapter 5</div>
+      <div class="illustration">🧸</div>
+      <h2>Flawless & Goofy</h2>
+      <p>What I love best is when you simply become yourself. You are completely flawless, goofy, funny, beautiful, and adorable all at once. You just do little things naturally, and I already feel that soft <i>"awww she’s so cute"</i> feeling inside my heart.</p>
+      <div class="btn-container">
+        <button class="secondary" onclick="nextPage(4)">Back</button>
+        <button onclick="nextPage(6)">Turn Page ➔</button>
+      </div>
+    </div>
+
+    <!-- PAGE 6 -->
+    <div class="page" id="page-6">
+      <div class="page-number">Chapter 6</div>
+      <div class="illustration">🧥</div>
+      <h2>The Hiroshi Sweatshirt & Your Scent</h2>
+      <p>I love the way you dress—especially that dark blue/grey sweatshirt with Hiroshi on it. Seeing you wear it is so pretty and heartwarming. And your hair always smells so amazing, like home whenever I am close to you.</p>
+      <div class="btn-container">
+        <button class="secondary" onclick="nextPage(5)">Back</button>
+        <button onclick="nextPage(7)">Turn Page ➔</button>
+      </div>
+    </div>
+
+    <!-- PAGE 7 -->
+    <div class="page" id="page-7">
+      <div class="page-number">Chapter 7</div>
+      <div class="illustration">💍</div>
+      <h2>My Promise & Future</h2>
+      <p>I am working hard every single day to build the future we deserve. My dream is to hold your hand through every milestone ahead, to protect you, to cherish you, and to make you my wife one day.</p>
+      <div class="btn-container">
+        <button class="secondary" onclick="nextPage(6)">Back</button>
+        <button onclick="nextPage(8)">Turn Page ➔</button>
+      </div>
+    </div>
+
+    <!-- PAGE 8 -->
+    <div class="page" id="page-8">
       <div class="page-number">The Promise</div>
       <div class="illustration">💌</div>
       <h2>Will You Keep Walking This Journey With Me?</h2>
       <p>Will you continue to love me, keep being patient with me, and stay by my side as we write the rest of our story together?</p>
-      <div class="btn-container" id="final-btn-container" style="position: relative; min-height: 60px;">
+      <div class="btn-container" id="final-btn-container" style="position: relative; min-height: 70px;">
         <button onclick="showFinal()">Yes, Always ❤️</button>
-        <button class="secondary" id="no-btn" onmouseover="moveNoButton()" onclick="moveNoButton()">No 😜</button>
+        <button class="secondary" id="no-btn">No 😜</button>
       </div>
     </div>
 
@@ -235,7 +288,7 @@
     <div class="final-screen" id="final-screen">
       <div class="hearts-burst">💖 ✨ 💍 ✨ 💖</div>
       <h2 style="margin-top:15px;">I Love You!</h2>
-      <p>Thank you for choosing me every single day. I promise to always work hard for us and make our future together amazing.</p>
+      <p>Thank you for choosing me every single day. I promise to cherish you to the bone and make our future together amazing.</p>
       <div class="btn-container">
         <button class="secondary" onclick="rewindStory()">↺ Read From Beginning</button>
       </div>
@@ -258,35 +311,42 @@
     }
 
     function rewindStory() {
-      // Reset pages view
       document.querySelectorAll('.page').forEach(page => page.style.display = '');
       document.getElementById('final-screen').style.display = 'none';
       
-      // Reset playful no button position
       const noBtn = document.getElementById('no-btn');
-      noBtn.style.position = 'static';
-      noBtn.style.left = 'auto';
-      noBtn.style.top = 'auto';
+      noBtn.style.position = 'relative';
+      noBtn.style.left = '0px';
+      noBtn.style.top = '0px';
 
       nextPage(1);
     }
 
-    function moveNoButton() {
-      const btn = document.getElementById('no-btn');
-      const container = document.getElementById('final-btn-container');
+    // Touchscreen / Mouse Evasion Logic for "No" button
+    const noBtn = document.getElementById('no-btn');
+    const container = document.getElementById('final-btn-container');
+
+    function dodgeNoButton(e) {
+      if (e) e.preventDefault();
       
       const containerRect = container.getBoundingClientRect();
-      const btnRect = btn.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
 
-      const maxX = containerRect.width - btnRect.width;
-      const maxY = 120; // Allow moving slightly up/down
+      const maxX = (containerRect.width / 2) - (btnRect.width / 2) - 10;
+      const maxY = 60; 
 
-      const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
-      const randomY = Math.floor(Math.random() * maxY) - (maxY / 2);
+      const randomX = (Math.random() * (maxX * 2)) - maxX;
+      const randomY = (Math.random() * (maxY * 2)) - maxY;
 
-      btn.style.position = 'absolute';
-      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `calc(50% - ${btnRect.width / 2}px + ${randomX}px)`;
+      noBtn.style.top = `calc(50% - ${btnRect.height / 2}px + ${randomY}px)`;
     }
+
+    // Attach mouse, touch, and pointer events for total cross-device evasion
+    ['mouseover', 'touchstart', 'pointerdown', 'click'].forEach(evt => {
+      noBtn.addEventListener(evt, dodgeNoButton, { passive: false });
+    });
 
     // Canvas Falling Hearts / Confetti Script
     const canvas = document.getElementById('confetti-canvas');
@@ -302,11 +362,11 @@
 
     function startConfetti() {
       particles = [];
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < 70; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height - canvas.height,
-          size: Math.random() * 18 + 10,
+          size: Math.random() * 20 + 10,
           speedY: Math.random() * 3 + 2,
           speedX: Math.random() * 2 - 1,
           color: ['#e63946', '#ffb703', '#ffb5a7', '#f8ad9d'][Math.floor(Math.random() * 4)]
