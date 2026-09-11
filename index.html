@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Story & Forever</title>
+  <!-- Google Fonts for Storybook Aesthetics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --bg-color: #fdf6f0;
@@ -18,11 +23,11 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background-color: var(--bg-color);
+      background: linear-gradient(135deg, #fdf6f0 0%, #fae1dd 100%);
       color: var(--text);
       display: flex;
       justify-content: center;
@@ -32,38 +37,51 @@
       overflow-x: hidden;
     }
 
+    /* Confetti Canvas Overlay */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
+    }
+
     .book-container {
       width: 100%;
       max-width: 550px;
       background: var(--card-bg);
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-      padding: 35px 30px;
+      border-radius: 24px;
+      box-shadow: 0 20px 40px rgba(230, 57, 70, 0.08);
+      padding: 40px 30px;
       position: relative;
-      border: 2px solid #f1e3d3;
+      border: 1px solid #f8edeb;
       text-align: center;
+      z-index: 10;
     }
 
     .page {
       display: none;
-      animation: fadeIn 0.6s ease-in-out;
+      animation: pageTurn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     .page.active {
       display: block;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes pageTurn {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     .page-number {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 2px;
       color: var(--subtext);
       margin-bottom: 15px;
+      font-weight: 600;
     }
 
     .illustration {
@@ -72,31 +90,36 @@
     }
 
     h1, h2 {
+      font-family: 'Playfair Display', serif;
       color: var(--primary);
       margin-bottom: 15px;
-      font-size: 1.8rem;
+      font-size: 1.9rem;
     }
 
     p {
       line-height: 1.7;
       color: #4a4e69;
       font-size: 1.05rem;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      font-weight: 300;
     }
 
     .btn-container {
       display: flex;
       justify-content: center;
+      align-items: center;
       gap: 15px;
-      margin-top: 25px;
+      margin-top: 20px;
+      min-height: 50px;
+      position: relative;
     }
 
     button {
       background-color: var(--primary);
       color: white;
       border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
+      padding: 12px 28px;
+      font-size: 0.95rem;
       font-weight: 600;
       border-radius: 30px;
       cursor: pointer;
@@ -119,14 +142,20 @@
       background-color: #e9ecef;
     }
 
-    .final-screen {
-      display: none;
-      padding: 20px 0;
+    #no-btn {
+      position: absolute;
+      transition: all 0.15s ease;
     }
 
-    .hearts {
+    .final-screen {
+      display: none;
+      padding: 10px 0;
+      animation: pageTurn 0.6s ease;
+    }
+
+    .hearts-burst {
       color: var(--primary);
-      font-size: 2rem;
+      font-size: 2.2rem;
       animation: pulse 1.5s infinite;
     }
 
@@ -138,6 +167,8 @@
   </style>
 </head>
 <body>
+
+  <canvas id="confetti-canvas"></canvas>
 
   <div class="book-container">
     
@@ -194,34 +225,109 @@
       <div class="illustration">💌</div>
       <h2>Will You Keep Walking This Journey With Me?</h2>
       <p>Will you continue to love me, keep being patient with me, and stay by my side as we write the rest of our story together?</p>
-      <div class="btn-container">
+      <div class="btn-container" id="final-btn-container" style="position: relative; min-height: 60px;">
         <button onclick="showFinal()">Yes, Always ❤️</button>
-        <button onclick="showFinal()">Forever & Ever 💖</button>
+        <button class="secondary" id="no-btn" onmouseover="moveNoButton()" onclick="moveNoButton()">No 😜</button>
       </div>
     </div>
 
     <!-- FINAL CONFIRMATION SCREEN -->
     <div class="final-screen" id="final-screen">
-      <div class="hearts">💖 ✨ 💍 ✨ 💖</div>
+      <div class="hearts-burst">💖 ✨ 💍 ✨ 💖</div>
       <h2 style="margin-top:15px;">I Love You!</h2>
       <p>Thank you for choosing me every single day. I promise to always work hard for us and make our future together amazing.</p>
+      <div class="btn-container">
+        <button class="secondary" onclick="rewindStory()">↺ Read From Beginning</button>
+      </div>
     </div>
 
   </div>
 
   <script>
     function nextPage(pageNum) {
-      document.querySelectorAll('.page').forEach(page => {
-        page.classList.remove('active');
-      });
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.getElementById('final-screen').style.display = 'none';
       document.getElementById('page-' + pageNum).classList.add('active');
     }
 
     function showFinal() {
-      document.querySelectorAll('.page').forEach(page => {
-        page.style.display = 'none';
+      document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+      const finalScreen = document.getElementById('final-screen');
+      finalScreen.style.display = 'block';
+      startConfetti();
+    }
+
+    function rewindStory() {
+      // Reset pages view
+      document.querySelectorAll('.page').forEach(page => page.style.display = '');
+      document.getElementById('final-screen').style.display = 'none';
+      
+      // Reset playful no button position
+      const noBtn = document.getElementById('no-btn');
+      noBtn.style.position = 'static';
+      noBtn.style.left = 'auto';
+      noBtn.style.top = 'auto';
+
+      nextPage(1);
+    }
+
+    function moveNoButton() {
+      const btn = document.getElementById('no-btn');
+      const container = document.getElementById('final-btn-container');
+      
+      const containerRect = container.getBoundingClientRect();
+      const btnRect = btn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = 120; // Allow moving slightly up/down
+
+      const randomX = Math.floor(Math.random() * maxX) - (maxX / 2);
+      const randomY = Math.floor(Math.random() * maxY) - (maxY / 2);
+
+      btn.style.position = 'absolute';
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    // Canvas Falling Hearts / Confetti Script
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function startConfetti() {
+      particles = [];
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          size: Math.random() * 18 + 10,
+          speedY: Math.random() * 3 + 2,
+          speedX: Math.random() * 2 - 1,
+          color: ['#e63946', '#ffb703', '#ffb5a7', '#f8ad9d'][Math.floor(Math.random() * 4)]
+        });
+      }
+      animateConfetti();
+    }
+
+    function animateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p) => {
+        p.y += p.speedY;
+        p.x += p.speedX;
+        ctx.fillStyle = p.color;
+        ctx.font = `${p.size}px serif`;
+        ctx.fillText('❤️', p.x, p.y);
       });
-      document.getElementById('final-screen').style.display = 'block';
+
+      if (particles.some(p => p.y < canvas.height)) {
+        requestAnimationFrame(animateConfetti);
+      }
     }
   </script>
 
