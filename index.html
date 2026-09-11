@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story & Forever</title>
+  <style>
+    :root {
+      --bg-color: #fdf6f0;
+      --card-bg: #ffffff;
+      --primary: #e63946;
+      --accent: #ffb703;
+      --text: #2b2d42;
+      --subtext: #6c757d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .book-container {
+      width: 100%;
+      max-width: 550px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+      padding: 35px 30px;
+      position: relative;
+      border: 2px solid #f1e3d3;
+      text-align: center;
+    }
+
+    .page {
+      display: none;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .page-number {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--subtext);
+      margin-bottom: 15px;
+    }
+
+    .illustration {
+      font-size: 3.5rem;
+      margin: 15px 0;
+    }
+
+    h1, h2 {
+      color: var(--primary);
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+
+    p {
+      line-height: 1.7;
+      color: #4a4e69;
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(230, 57, 70, 0.25);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(230, 57, 70, 0.35);
+    }
+
+    button.secondary {
+      background-color: #f1f3f5;
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    button.secondary:hover {
+      background-color: #e9ecef;
+    }
+
+    .final-screen {
+      display: none;
+      padding: 20px 0;
+    }
+
+    .hearts {
+      color: var(--primary);
+      font-size: 2rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="book-container">
+    
+    <!-- PAGE 1 -->
+    <div class="page active" id="page-1">
+      <div class="page-number">Chapter 1</div>
+      <div class="illustration">📖</div>
+      <h2>Once Upon a Time...</h2>
+      <p>Every great story has a turning point—a moment where everything before it feels quiet, and everything after it feels bright. For me, that turning point was meeting you.</p>
+      <div class="btn-container">
+        <button onclick="nextPage(2)">Turn Page ➔</button>
+      </div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page" id="page-2">
+      <div class="page-number">Chapter 2</div>
+      <div class="illustration">✨</div>
+      <h2>The Quiet Moments</h2>
+      <p>It’s in the small things: the laughs we share, the quiet comfort of just knowing you're there, and the way you make every busy day feel lighter just by being in my life.</p>
+      <div class="btn-container">
+        <button class="secondary" onclick="nextPage(1)">Back</button>
+        <button onclick="nextPage(3)">Turn Page ➔</button>
+      </div>
+    </div>
+
+    <!-- PAGE 3 -->
+    <div class="page" id="page-3">
+      <div class="page-number">Chapter 3</div>
+      <div class="illustration">⏳</div>
+      <h2>A Request for Patience</h2>
+      <p>I know building our future takes time and effort. I'm working hard every day so that I can give us the best life possible. Thank you for walking beside me and for being so patient with me along the way.</p>
+      <div class="btn-container">
+        <button class="secondary" onclick="nextPage(2)">Back</button>
+        <button onclick="nextPage(4)">Turn Page ➔</button>
+      </div>
+    </div>
+
+    <!-- PAGE 4 -->
+    <div class="page" id="page-4">
+      <div class="page-number">Chapter 4</div>
+      <div class="illustration">💍</div>
+      <h2>Looking Ahead</h2>
+      <p>My dream isn't just about today or tomorrow. My dream is to hold your hand through every milestone ahead, to grow together, and to make you my wife one day.</p>
+      <div class="btn-container">
+        <button class="secondary" onclick="nextPage(3)">Back</button>
+        <button onclick="nextPage(5)">Turn Page ➔</button>
+      </div>
+    </div>
+
+    <!-- PAGE 5 -->
+    <div class="page" id="page-5">
+      <div class="page-number">The Promise</div>
+      <div class="illustration">💌</div>
+      <h2>Will You Keep Walking This Journey With Me?</h2>
+      <p>Will you continue to love me, keep being patient with me, and stay by my side as we write the rest of our story together?</p>
+      <div class="btn-container">
+        <button onclick="showFinal()">Yes, Always ❤️</button>
+        <button onclick="showFinal()">Forever & Ever 💖</button>
+      </div>
+    </div>
+
+    <!-- FINAL CONFIRMATION SCREEN -->
+    <div class="final-screen" id="final-screen">
+      <div class="hearts">💖 ✨ 💍 ✨ 💖</div>
+      <h2 style="margin-top:15px;">I Love You!</h2>
+      <p>Thank you for choosing me every single day. I promise to always work hard for us and make our future together amazing.</p>
+    </div>
+
+  </div>
+
+  <script>
+    function nextPage(pageNum) {
+      document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+      });
+      document.getElementById('page-' + pageNum).classList.add('active');
+    }
+
+    function showFinal() {
+      document.querySelectorAll('.page').forEach(page => {
+        page.style.display = 'none';
+      });
+      document.getElementById('final-screen').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
